@@ -16,13 +16,13 @@ def run():
         action = hosts.get_action()
 
         with switch(action) as obj:
-            obj.case('c', hosts.create_account)
-            obj.case('l', hosts.log_into_account)
+            obj.case('C', hosts.create_account)
+            obj.case('L', hosts.log_into_account)
 
-            obj.case('o', order_your_item)
-            obj.case('v', view_your_order)
-            obj.case('m', lambda: 'change_status')
-            obj.case(['x','exit','exit()','Get me out'], hosts.exit_app)
+            obj.case('O', order_your_item)
+            obj.case('V', view_your_order)
+            obj.case('M', lambda: 'change_status')
+            obj.case(['X','exit','exit()','Get me out'], hosts.exit_app)
             obj.case('?', show_user_options)
 
             obj.default(hosts.unknown_command)

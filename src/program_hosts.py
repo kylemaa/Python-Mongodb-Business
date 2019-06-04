@@ -8,6 +8,19 @@ def run():
         obj.case('C', create_account)
         obj.case('L', log_into_account)
 
+        obj.case('V', view_your_order)
+        obj.case('U', update_your_product)
+        obj.case('R', register_a_product)
+        s.case('m', lambda: 'change_mode')
+
+        s.case('?', show_commands)
+        s.case('', lambda: None)
+        s.case(['x', 'bye', 'exit', 'exit()'], hosts.exit_app)
+
+        s.default(hosts.unknown_command)
+
+    state.reload_account()
+
 
 def get_action():
     # text let the customer/user know they're logged in
