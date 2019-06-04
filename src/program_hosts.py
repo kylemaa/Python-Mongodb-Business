@@ -1,5 +1,9 @@
-from src.infrastructure import state
-from src.infrastructure import switchlang as switch
+import datetime
+from colorama import Fore
+from dateutil import parser
+
+from infrastructure import state
+from infrastructure.switchlang import switch
 
 
 def run():
@@ -9,7 +13,7 @@ def run():
         obj.case('L', log_into_account)
 
         obj.case('V', view_your_order)
-        obj.case('U', update_your_product)
+        obj.case('U', update_product_availability)
         obj.case('R', register_a_product)
         s.case('m', lambda: 'change_mode')
 
@@ -17,9 +21,9 @@ def run():
         s.case('', lambda: None)
         s.case(['x', 'bye', 'exit', 'exit()'], hosts.exit_app)
 
-        s.default(hosts.unknown_command)
+        s.default(unknown_command)
 
-    state.reload_account()
+    state.reload_user_app()
 
 
 def get_action():
@@ -33,6 +37,25 @@ def get_action():
 
 
 def create_account():
+    name = input('Enter your full name: \n')
+    email = input('Enter your email address: ')
+    success_msg == 'Successfully created an account'
+
+# def log_into_account():
 
 
-def log_into_account():
+# def view_orders():
+
+
+# def update_product_availability():
+
+
+# def register_a_product():
+
+
+def success_msg(text):
+        print(Fore.LIGHTGREEN_EX + text + Fore.WHITE)
+
+
+def error_msg(text):
+        print(Fore.LIGHTRED_EX + text + Fore.WHITE)

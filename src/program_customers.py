@@ -1,5 +1,5 @@
-from src.infrastructure import switchlang as switch
-import src.program_hosts as hosts
+from infrastructure.switchlang import switch
+import program_hosts as hosts
 import datetime
 
 
@@ -39,8 +39,8 @@ def show_user_options():
     print()
 
 
-def order_your_item():
+# def order_your_item():
 
 
-def view_your_order():
+# def view_your_order():
 

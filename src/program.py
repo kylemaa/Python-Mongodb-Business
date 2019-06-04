@@ -1,7 +1,6 @@
 import program_customers
 import program_hosts
 
-
 def main():
     try:
         while True:

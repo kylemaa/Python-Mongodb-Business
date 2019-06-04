@@ -1,4 +1,4 @@
-from src.data.owner import Owner
+from data.owner import Owner
 # Need to do/import service method as svc to find account by email
 
 active_app_user: Owner = None
