@@ -1,0 +1,5 @@
+pymongo[tls,srv]
+mongoengine
+tqdm
+colorama
+python-dateutil
