@@ -1,5 +1,5 @@
 import uuid
-from typing import Callable, Any
+from typing import Callable, A
 
 
 class switch:

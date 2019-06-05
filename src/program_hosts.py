@@ -10,7 +10,8 @@ def run():
     action = get_action()
     with switch(action) as obj:
         obj.case('C', create_account)
-        obj.case('L', log_into_account)
+
+''' obj.case('L', log_into_account)
 
         obj.case('V', view_your_order)
         obj.case('U', update_product_availability)
@@ -23,23 +24,19 @@ def run():
 
         s.default(unknown_command)
 
-    state.reload_user_app()
+    state.reload_user_app()'''
 
 
 def get_action():
     # text let the customer/user know they're logged in
-    text = '> '
-    if state.active_account:
-        text = f'{state.active_account.name}> '
-
-    action = input(Fore.YELLOW + text + Fore.WHITE)
+    action = input('put a letter ples:')
     return action
 
 
 def create_account():
     name = input('Enter your full name: \n')
     email = input('Enter your email address: ')
-    success_msg == 'Successfully created an account'
+    error_msg('Successfully created an account')
 
 # def log_into_account():
 
@@ -54,8 +51,8 @@ def create_account():
 
 
 def success_msg(text):
-        print(Fore.LIGHTGREEN_EX + text + Fore.WHITE)
+        print(Fore.LIGHTGREEN_EX + text)
 
 
 def error_msg(text):
-        print(Fore.LIGHTRED_EX + text + Fore.WHITE)
+        print(Fore.LIGHTRED_EX + text)
