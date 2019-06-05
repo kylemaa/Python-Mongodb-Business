@@ -1,5 +1,7 @@
 from infrastructure.switchlang import switch
+from infrastructure import state
 import program_hosts as hosts
+
 import datetime
 
 
@@ -22,10 +24,12 @@ def run():
             obj.case('O', order_your_item)
             obj.case('V', view_your_order)
             obj.case('M', lambda: 'change_status')
-            obj.case(['X','exit','exit()','Get me out'], hosts.exit_app)
+            obj.case(['X', 'exit', 'exit()', 'Get me out'], hosts.exit_app)
             obj.case('?', show_user_options)
 
             obj.default(hosts.unknown_command)
+        # Reload the user app to check for global variable
+        state.reload_user_app()
 
 
 def show_user_options():
@@ -38,9 +42,7 @@ def show_user_options():
     print('[X] to exit this app')
     print()
 
-
 # def order_your_item():
 
 
 # def view_your_order():
-

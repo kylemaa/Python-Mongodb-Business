@@ -1,10 +1,14 @@
 from data.owner import Owner
-# Need to do/import service method as svc to find account by email
+import services.data_service as data_service
 
+
+# Set the value of the owner's object to none or start
 active_app_user: Owner = None
+
+
 def reload_user_app():
     global active_app_user
     if not active_app_user:
         return
     else:
-        active_app_user = svc.find_account_by_email(active_app_user.email)
+        active_app_user = data_service.find_account_by_email(active_app_user.email)
