@@ -24,7 +24,7 @@ def run():
             obj.case('O', order_your_item)
             obj.case('V', view_your_order)
             obj.case('M', lambda: 'change_status')
-            obj.case(['X', 'exit', 'exit()', 'Get me out'], hosts.exit_app)
+            obj.case(['X', 'exit', 'exit()', 'Get me out', 'EXIT'], hosts.exit_app)
             obj.case('?', show_user_options)
 
             obj.default(hosts.unknown_command)
