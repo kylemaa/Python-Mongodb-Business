@@ -42,7 +42,14 @@ def show_user_options():
     print('[X] to exit this app')
     print()
 
-# def order_your_item():
+
+def order_your_item():
+    if not state.active_user_account:
+        hosts.error_msg('You must login first to order')
+        return
 
 
-# def view_your_order():
+def view_your_order():
+    if not state.active_user_account:
+        hosts.error_msg('You must login first to view your orders')
+        return

@@ -39,25 +39,42 @@ def create_account():
         error_msg('Failed. This email is already registered.')
         return
 
-    state.active_app_user = data_service.create_account(name, email)
+    state.active_user_account = data_service.create_account(name, email)
     success_msg('Successfully created an account')
 
 
-# def log_into_account():
+def log_into_account():
+    email = input('Enter your email address: ')
+    account = data_service.find_account_by_email(email)
+    if not account:
+        error_msg('Failed. Cannot find this account in database')
+        return
+
+    state.active_user_account = account
+    success_msg('Successfully logged into your account')
 
 
-# def view_orders():
+def view_your_orders():
+    if not state.active_user_account:
+        error_msg('You must login first to view your customers orders')
+        return
 
 
-# def update_product_availability():
+def update_product_availability():
+    if not state.active_user_account:
+        error_msg('You must login first to update your products')
+        return
 
 
-# def register_a_product():
+def register_a_product():
+    if not state.active_user_account:
+        error_msg('You must login first to register your products')
+        return
 
 
 def success_msg(text):
-        print(Fore.LIGHTGREEN_EX + text)
+    print(Fore.LIGHTGREEN_EX + text)
 
 
 def error_msg(text):
-        print(Fore.LIGHTRED_EX + text)
+    print(Fore.LIGHTRED_EX + text)

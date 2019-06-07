@@ -1,4 +1,4 @@
-import data.owner as Owner
+import data.owners as Owner
 import bson
 
 
@@ -6,6 +6,7 @@ import bson
 # Return the first result of this Query or None with .first()
 def find_account_by_email(email: str) -> Owner:
     owner = Owner.objects(email=email).first()
+    return owner
 
 
 def create_account(name: str, email: str) -> Owner:
