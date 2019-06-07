@@ -1,3 +1,7 @@
+import mongoengine
+import datetime
+
+
 class Owner:
     register_date = mongoengine.DateTimeField(default=datetime.datetime.now)
     name = mongoengine.StringField(require=True)
@@ -6,4 +10,4 @@ class Owner:
     customer_ids = mongoengine.StringField(required=True)
     order_ids = mongoengine.StringField(required=True)
 
-    meta = {'dbalias': 'businessapp', 'collection': 'customer'}
+    meta = {'dbalias': 'businessapp', 'collection': 'owners'}
