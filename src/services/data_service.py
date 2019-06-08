@@ -16,3 +16,6 @@ def create_account(name: str, email: str) -> Owner:
 
     owner.save()
     return owner
+
+
+def order_item(account, customer, item, amount):

@@ -1,6 +1,7 @@
 from infrastructure.switchlang import switch
 from infrastructure import state
 import program_hosts as hosts
+import services.data_service as data_service
 
 import datetime
 
@@ -47,6 +48,14 @@ def order_your_item():
     if not state.active_user_account:
         hosts.error_msg('You must login first to order')
         return
+    items = data_service.get_item_for_user(state.active_user_account.id)
+    customer = data_service.find_customer_id(state.active_user_account.id)
+
+    item = items[int(input('Which item do you want to order (number)')) - 1]
+    amount = input('Enter the amount of number for this item')
+    data_service.order_item(state.active_user_account, customer, item, amount)
+
+    hosts.success_msg('Successfully ordered {} for {} at ${}/ dollar.'.format(item.name, customer.name, item.price))
 
 
 def view_your_order():
