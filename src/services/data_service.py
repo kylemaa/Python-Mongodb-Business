@@ -1,4 +1,5 @@
 import data.owners as Owner
+from data.orders import Ordering as Ordering
 import bson
 
 
@@ -19,3 +20,11 @@ def create_account(name: str, email: str) -> Owner:
 
 
 def order_item(account, customer, item, amount):
+    order: Ordering = None
+
+    order.guest_owner_id = account.id
+    order.guest_customer_id = customer.id
+    order.guest_item_id = item.id
+    order.guest_amount = amount
+
+    shipment.save
