@@ -2,7 +2,7 @@ import mongoengine
 import datetime
 
 
-class Customer:
+class Customer(mongoengine.Document):
     register_date = mongoengine.DateTimeField(default=datetime.datetime.now)
     phone_number = mongoengine.StringField(required=True)
     address = mongoengine.StringField(required=True)

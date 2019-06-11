@@ -12,16 +12,26 @@ def run():
         obj.case('C', create_account)
         obj.case('L', log_into_account)
 
-        obj.case('V', view_your_order)
+        obj.case('V', view_your_shipments)
         obj.case('U', update_product_availability)
         obj.case('R', register_a_product)
-        s.case('M', lambda: 'change_mode')
+        obj.case('M', lambda: 'change_mode')
 
-        s.case('?', show_commands)
-        s.case('', lambda: None)
-        s.case(['X', 'bye', 'exit', 'exit()', 'EXIT'], hosts.exit_app)
+        obj.case('?', show_user_options)
+        obj.case('', lambda: None)
+        obj.case(['X', 'bye', 'exit', 'exit()', 'EXIT'], hosts.exit_app)
 
         s.default(unknown_command)
+
+
+def show_user_options():
+    print('Press the letter in [ ] to indicate your selection')
+    print('[C] to Create new account')
+    print('[L] to Log into existing account')
+    print('[V] to View your order(s)')
+    print('[M] to return to Main Menu')
+    print('[X] to exit this app')
+    print()
 
 
 def get_action():
@@ -54,10 +64,21 @@ def log_into_account():
     success_msg('Successfully logged into your account')
 
 
-def view_your_orders():
+def view_your_shipments():
     if not state.active_user_account:
         error_msg('You must login first to view your customers orders')
         return
+    shipments = data_service.find_orders_for_user(state.active_user_account)
+
+    orders = [
+        (s, o)
+        for s in shipments
+        for o in o.orders
+        if o.ordered_date is not None
+    ]
+
+    print("You have {} orders.".format(len(orders)))
+
 
 
 def update_product_availability():
