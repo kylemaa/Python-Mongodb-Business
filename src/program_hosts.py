@@ -13,15 +13,16 @@ def run():
         obj.case('L', log_into_account)
 
         obj.case('V', view_your_shipments)
-        obj.case('U', update_product_availability)
-        obj.case('R', register_a_product)
         obj.case('M', lambda: 'change_mode')
 
         obj.case('?', show_user_options)
         obj.case('', lambda: None)
-        obj.case(['X', 'bye', 'exit', 'exit()', 'EXIT'], hosts.exit_app)
+        obj.case(['X', 'bye', 'exit', 'exit()', 'EXIT'], exit_app)
 
-        s.default(unknown_command)
+        obj.default(unknown_command)
+
+    if obj.result == 'change_mode':
+        return
 
 
 def show_user_options():
@@ -68,7 +69,7 @@ def view_your_shipments():
     if not state.active_user_account:
         error_msg('You must login first to view your customers orders')
         return
-    shipments = data_service.find_orders_for_user(state.active_user_account)
+    shipments = data_service.find_shipments_for_user(state.active_user_account)
 
     orders = [
         (s, o)
@@ -80,17 +81,14 @@ def view_your_shipments():
     print("You have {} orders.".format(len(orders)))
 
 
-
-def update_product_availability():
-    if not state.active_user_account:
-        error_msg('You must login first to update your products')
-        return
+def unknown_command():
+    print("Sorry we didn't understand that command.")
 
 
-def register_a_product():
-    if not state.active_user_account:
-        error_msg('You must login first to register your products')
-        return
+def exit_app():
+    print()
+    print('bye')
+    raise KeyboardInterrupt()
 
 
 def success_msg(text):

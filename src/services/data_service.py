@@ -1,6 +1,7 @@
 import mongoengine
 from typing import List
 import data.owners as Owner
+import data.customers as Customer
 from data.orders import Ordering as Ordering
 from data.shipments import Shipment
 import bson
@@ -26,6 +27,12 @@ def find_shipments_for_user(account: Owner) -> List[Shipment]:
     query = Shipment.objects(id__in=account.shipment_ids)
     shipments = list(query)
     return shipments
+
+
+def find_orders_for_customer(user_id: bson.ObjectId) -> List[Ordering]:
+    owner = Owner.objects(id=user_id).first()
+    orders = Ordering.objects(id__in=owner.customer_ids).all()
+    return orders
 
 
 def order_shipment(account, customer, item, amount):
